@@ -5,8 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { loadPerson } from './assets/loadPerson.js'
 import { ObjectLoader } from 'three';
 
-import { print_console_text } from './cursor.js';
-
 
 
 // Setup
@@ -246,7 +244,7 @@ function moveCamera() {
   camera.rotation.y = t * -0.0002;
 
   if (camera.position.z > 8 && libCheckControl==1) {
-    print_console_text();
+    //print_console_text();
     libCheckControl += 1;
   }
 }

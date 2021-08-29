@@ -63,7 +63,6 @@ Full-stack systems online!
 }
 document.getElementById("check-libraries-button").onclick = print_console_text;
 
-export {print_console_text}
 
 
 
