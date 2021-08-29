@@ -6,7 +6,9 @@ async function loadPerson() {
     console.log('Person loaded!', personData);
 
     const person = personData.scene.children[0];
+    
     return person
+
   }
 
   export { loadPerson };
