@@ -1,11 +1,11 @@
 {
-  "name": "three-demo",
+  "name": "nojus-cv",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite preview"
   },
   "devDependencies": {
     "vite": "^2.3.0"
