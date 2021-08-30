@@ -7,9 +7,6 @@ import { ObjectLoader } from 'three';
 
 import background_img from "./assets/images/214962.jpg";
 import moon_img from "./assets/images/moon.jpg";
-import planet1_img from "./assets/images/planet1.jpeg";
-import planet2_img from "./assets/images/planet2.png";
-import planet3_img from "./assets/images/planet3.jpeg";
 import profile_img from "./assets/images/profile.jpeg";
 import normal_texture from "./assets/images/normal.jpg";
 
@@ -132,41 +129,28 @@ moon.position.y = 13
 
 // Planets
 
-const planetTexture1 = new THREE.TextureLoader().load(planet1_img);
-const planetTexture2 = new THREE.TextureLoader().load(planet2_img);
-const planetTexture3 = new THREE.TextureLoader().load(planet3_img);
-
 const planet1 = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 32, 32),
-  new THREE.MeshStandardMaterial({
-    map: planetTexture1,
-    normalMap: normalTexture,
-  })
+  new THREE.IcosahedronGeometry(1, 0),
+  material
 );
 planet1.position.z = 17;
-planet1.position.x = -14;
+planet1.position.x = -13;
 planet1.position.y = 1;
 
 const planet2 = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 32, 32),
-  new THREE.MeshStandardMaterial({
-    map: planetTexture2,
-    normalMap: normalTexture,
-  })
+  new THREE.IcosahedronGeometry(1, 0),
+  material
 );
 planet2.position.z = 15;
-planet2.position.x = -8;
+planet2.position.x = -7;
 planet2.position.y = 1;
 
 const planet3 = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 32, 32),
-  new THREE.MeshStandardMaterial({
-    map: planetTexture3,
-    normalMap: normalTexture,
-  })
+  new THREE.IcosahedronGeometry(1, 0),
+  material
 );
 planet3.position.z = 13;
-planet3.position.x = -4;
+planet3.position.x = -3;
 planet3.position.y = 1;
 
 let planets = [planet1, planet2, planet3];
@@ -238,6 +222,7 @@ var timestamp = 0;
 
 
 
+
 // Terminal Type-out
 
 function print_text (container, text) {
@@ -295,16 +280,17 @@ Engine control modules - found
 Full-stack systems online!
 `)
 }
-document.getElementById("check-libraries-button").onclick = print_console_text;
+//document.getElementById("check-libraries-button").onclick = print_console_text;
 
 
 // Scroll Animation
 var libCheckControl = 0;
+
 function moveCamera() {
   var t = document.body.getBoundingClientRect().top;
-  moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  moon.rotation.z += 0.05;
+  // moon.rotation.x += 0.05;
+  // moon.rotation.y += 0.075;
+  // moon.rotation.z += 0.05;
 
 
   camera.position.z = t * -0.01;
@@ -321,6 +307,9 @@ function moveCamera() {
 document.body.onscroll = moveCamera;
 moveCamera();
 
+var terminal = document.getElementById('terminal');
+const run_terminal_event = new Event('run-terminal');
+var virgin = true;
 
 // Animation Loop
 
@@ -360,10 +349,10 @@ function animate() {
     timestamp = Date.now() * 0.0001;
     planet.rotation.z += 0.002;
     planet.rotation.x += 0.001;
-    planet.position.z = (-2*Math.exp((camera.position.x)*15))+130;
+    planet.position.z = (-2*Math.exp((camera.position.x)*2))+4;
 
     // Moon orbit
-    let speed = 0.001;
+    let speed = 0.0008;
     planet.moons.map( moon => {
       var date = Date.now() * speed;
       moon.position.set(
@@ -371,16 +360,22 @@ function animate() {
         ((Math.cos(date+moon.offset) * moon.orbit)+planet.position.y),
         ((Math.sin(date+moon.offset) * moon.orbit)+planet.position.z),
       );
-      moon.rotation.y = 1 * (Math.pow(planet.position.z, 2)/220);
-      moon.rotation.x += moon.position.z/400;
-      moon.rotation.z = -0.2;
+      moon.rotation.y =  (Math.pow(moon.position.x, 3)/420) * speed * -100;
+      moon.rotation.x += (0.01 + Math.random()/20)*speed*1000;
+      moon.rotation.z = -0.2 * (speed*1000);
     })
   })
 
-  // Move Camera while the text is printing
-  if (libCheckControl > 0 && libCheckControl < 100) {
-    camera.position.z += 0.01;
-    libCheckControl += 1;
+  // if (camera.position.z > 4 && camera.position.z < 12) {
+  //   terminal.style.opacity = (`100%`)
+  // } else {
+  //   terminal.style.opacity = (`0%`)
+  // }
+  
+  terminal.style.opacity = (2/(Math.pow((camera.position.z - 8.5), 2)))
+  if (camera.position.z > 8 && virgin) {
+    virgin = false;
+    terminal.dispatchEvent(run_terminal_event);
   }
 
   renderer.render(scene, camera);
