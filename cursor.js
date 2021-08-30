@@ -3,11 +3,6 @@ function print_text (container, text) {
     node.innerText = ""
     node.type(text)
   }
-
-function print_new_text (text) {
-    const node = document.createElement(h1)
-    node.type(text)
-}
   
   
   // Source code 🚩

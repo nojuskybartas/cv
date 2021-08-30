@@ -2,10 +2,16 @@ import './style.css';
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { loadPerson } from './assets/loadPerson.js'
+//import { loadPerson } from './assets/loadPerson.js'
 import { ObjectLoader } from 'three';
 
-
+import background_img from "./assets/images/214962.jpg";
+import moon_img from "./assets/images/moon.jpg";
+import planet1_img from "./assets/images/planet1.jpeg";
+import planet2_img from "./assets/images/planet2.png";
+import planet3_img from "./assets/images/planet3.jpeg";
+import profile_img from "./assets/images/profile.jpeg";
+import normal_texture from "./assets/images/normal.jpg";
 
 // Setup
 const scene = new THREE.Scene();
@@ -91,12 +97,12 @@ var timer = setInterval(shootStar, 1000);
 
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load('./assets/images/214962.jpg');
+const spaceTexture = new THREE.TextureLoader().load(background_img);
 scene.background = spaceTexture;
 
 // Avatar
 
-const avatarTexture = new THREE.TextureLoader().load('./assets/images/profile.JPEG');
+const avatarTexture = new THREE.TextureLoader().load(profile_img);
 
 const avatar = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: avatarTexture }));
 avatar.position.z = -5;
@@ -107,8 +113,8 @@ scene.add(avatar);
 
 // Moon
 
-const moonTexture = new THREE.TextureLoader().load('assets/images/moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('assets/images/normal.jpg');
+const moonTexture = new THREE.TextureLoader().load(moon_img);
+const normalTexture = new THREE.TextureLoader().load(normal_texture);
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
@@ -126,9 +132,9 @@ moon.position.y = 13
 
 // Planets
 
-const planetTexture1 = new THREE.TextureLoader().load('assets/images/planet1.jpeg');
-const planetTexture2 = new THREE.TextureLoader().load('assets/images/planet2.png');
-const planetTexture3 = new THREE.TextureLoader().load('assets/images/planet3.jpeg');
+const planetTexture1 = new THREE.TextureLoader().load(planet1_img);
+const planetTexture2 = new THREE.TextureLoader().load(planet2_img);
+const planetTexture3 = new THREE.TextureLoader().load(planet3_img);
 
 const planet1 = new THREE.Mesh(
   new THREE.SphereGeometry(1, 32, 32),
@@ -179,7 +185,7 @@ function addTextMoon(text_input, planet, orbit) {
     const geometry = new THREE.TextGeometry( text_input, {
       font: font,
       size: 0.3,
-      height: 0.5,
+      height: 0.1,
     });
 
     const text = new THREE.Mesh( geometry, material );
@@ -222,13 +228,75 @@ var timestamp = 0;
 
 // Person model
 
-//const person = await loadPerson();
-//scene.add(person);
-//person.scale.set(0.5,0.5,0.5)
-//person.position.z = 35;
-//person.position.x = -20;
-//person.position.y = -3;
-//person.rotation.z = 1;
+// const person = await loadPerson();
+// scene.add(person);
+// person.scale.set(0.5,0.5,0.5)
+// person.position.z = 35;
+// person.position.x = -20;
+// person.position.y = -3;
+// person.rotation.z = 1;
+
+
+
+// Terminal Type-out
+
+function print_text (container, text) {
+  const node = document.querySelector(container)
+  node.innerText = ""
+  node.type(text)
+}
+
+const sleep = time => new Promise(resolve => setTimeout(resolve, time))
+
+class TypeAsync extends HTMLSpanElement {
+  get typeInterval () {
+    const randomMs = 50 * Math.random()
+    return randomMs < 50 ? 10 : randomMs
+  }
+  
+  async type (text) {
+    for (let character of text) {
+      this.innerText += character
+      await sleep(this.typeInterval)
+    }
+  }
+  
+  async delete (text_to_delete) {
+    for (let character of text_to_delete) {
+      this.innerText = this.innerText.slice(0, this.innerText.length -1)
+      await sleep(this.typeInterval)
+    }
+  }
+}
+
+customElements.define('type-async', TypeAsync, { extends: 'span' })
+
+function print_console_text() {
+ 
+print_text("#type-text-1", `
+📜 System check: installed libraries
+
+Checking basic libraries:
+Object Oriented Programming - found
+
+Checking artificial intelligence modules:
+AI deep learning module - found
+AI reinforcement module - found
+AI vision module - found
+AI natural language processing module - incomplete, missing libraries...
+
+Checking robotics modules:
+Wiring - no shortings found
+Servers - online
+Positioning module - found
+Tracking module - found
+Engine control modules - found
+
+Full-stack systems online!
+`)
+}
+document.getElementById("check-libraries-button").onclick = print_console_text;
+
 
 // Scroll Animation
 var libCheckControl = 0;
@@ -303,7 +371,9 @@ function animate() {
         ((Math.cos(date+moon.offset) * moon.orbit)+planet.position.y),
         ((Math.sin(date+moon.offset) * moon.orbit)+planet.position.z),
       );
-      //moon.rotation.x += moon.position.z/1500;
+      moon.rotation.y = 1 * (Math.pow(planet.position.z, 2)/220);
+      moon.rotation.x += moon.position.z/400;
+      moon.rotation.z = -0.2;
     })
   })
 
