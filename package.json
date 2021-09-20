@@ -5,12 +5,13 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite preview"
   },
   "devDependencies": {
     "vite": "^2.3.0"
   },
   "dependencies": {
+    "dist": "^0.1.2",
     "three": "^0.128.0"
   }
 }
