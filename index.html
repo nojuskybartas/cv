@@ -160,13 +160,13 @@
           const ua = navigator.userAgent;
           if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
               alert("Please open this website on a desktop/laptop, not a tablet")
-              return "tablet";
+              // Tablet
           }
           else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
               alert("Please open this website on a desktop/laptop, not a phone")
-              return "mobile";
+              // Phone
           }
-          return "desktop";
+          // Desktop
       };
       deviceType();
     </script>
