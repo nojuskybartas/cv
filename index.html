@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.17e50649.svg" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.63a26457.svg" />
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|VT323" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/easing/EasePack.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
     <title>Nojus's Website</title>
-  <script type="module" crossorigin src="./assets/index.ceff051a.js"></script>
-  <link rel="modulepreload" href="./assets/vendor.53319203.js">
-  <link rel="stylesheet" href="./assets/index.07bad01b.css">
-</head>
+    <script type="module" crossorigin src="./assets/index.6508da04.js"></script>
+    <link rel="modulepreload" href="./assets/vendor.8766a6c7.js">
+    <link rel="stylesheet" href="./assets/index.07024987.css">
+  </head>
   <body>
 
    
@@ -74,7 +74,8 @@
             <li>Airport/office security system using vision AI</li>
           </ul>
           <ul>
-            <li>Emotion + Facial feature detector</li>
+            <li><a href="https://nojus-emotion-detector.herokuapp.com/">Emotion</a> + Facial feature detector</li>
+            
           </ul>
           <ul>
             <li>Tumor Detector that beats human accuracy</li>
@@ -153,6 +154,22 @@
     
     
     
+    <!-- Check for the device type -->
+    <script>
+      const deviceType = () => {
+          const ua = navigator.userAgent;
+          if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+              alert("Please open this website on a desktop/laptop, not a tablet")
+              return "tablet";
+          }
+          else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+              alert("Please open this website on a desktop/laptop, not a phone")
+              return "mobile";
+          }
+          return "desktop";
+      };
+      deviceType();
+    </script>
 
   </body>
 </html>
