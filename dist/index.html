@@ -9,9 +9,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/easing/EasePack.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
     <title>Nojus's Website</title>
-  <script type="module" crossorigin src="./assets/index.11d49adf.js"></script>
+  <script type="module" crossorigin src="./assets/index.0373d295.js"></script>
   <link rel="modulepreload" href="./assets/vendor.53319203.js">
-  <link rel="stylesheet" href="./assets/index.5b4d36be.css">
+  <link rel="stylesheet" href="./assets/index.ff87a7bb.css">
 </head>
   <body>
 
@@ -67,15 +67,14 @@
       </section>
 
       <section class="light">
-        <h2>👩🏽‍🚀 Projects </h2>
+        <h2>👩🏽‍🚀 Projects</h2>
 
         <p>
           <ul>
-            <li>Airport/office security system using vision AI <a href="https://github.com/lab271/badge-detection" style="color: inherit;">Code</a></li>
+            <li>Airport/office security system using vision AI</li>
           </ul>
           <ul>
-            <li><a href="https://nojus-emotion-detector.herokuapp.com/" style="color: inherit;">Emotion</a> + Facial feature detector</li>
-            
+            <li>Emotion + Facial feature detector</li>
           </ul>
           <ul>
             <li>Tumor Detector that beats human accuracy</li>
@@ -131,7 +130,6 @@
       <blockquote style="margin-bottom: 10%;">
         <p>Before you go!</p>
       </blockquote>
-
       <section style="margin-bottom: 50vh;">
         <h2>🌮 I have a confession to make</h2>
 
@@ -151,9 +149,25 @@
       </section>
 
       <footer>website built with vanilla javascript, css and html</footer>
-
     </main>
     
     
+    
+    <!-- Check for the device type -->
+    <script>
+      const deviceType = () => {
+          const ua = navigator.userAgent;
+          if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+              alert("Please open this website on a desktop/laptop, not a tablet")
+              return "tablet";
+          }
+          else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+              alert("Please open this website on a desktop/laptop, not a phone")
+              return "mobile";
+          }
+          return "desktop";
+      };
+      deviceType();
+  </script>
   </body>
 </html>
