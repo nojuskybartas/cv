@@ -6,6 +6,7 @@ canvas {
   left: 0;
 }
 
+
 :root {
   --dark-bg: rgba(15, 15, 15, 0.95);
   --spacing: 30vh;
@@ -18,11 +19,11 @@ canvas {
 
 
 main {
-  width: 100vw;
   color: white;
   z-index: 99;
   position: absolute;
   width: 100%;
+  left: 0;
   margin: 0px auto;
   padding: 120px 0px;
   
@@ -34,12 +35,6 @@ h1, h2, h3, blockquote {
   font-family: elevon, sans-serif;
   font-weight: 700;
   font-style: normal;
-}
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
 }
 
 header {
@@ -61,7 +56,6 @@ section {
 
 blockquote {
   margin: 0;
-  padding: 0;
   grid-column: 2 / span 9;
   margin-bottom: var(--spacing);
 }
@@ -82,7 +76,8 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 terminal {
@@ -111,8 +106,7 @@ terminal {
   color: inherit;
   bottom: 2.5vh;
   padding: 1%;
-  width: 30%
-
+  width: 30%;
 }
 
 .light {
